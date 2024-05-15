@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  web:
+    image: diamol/ch06-todo-list
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: tododb
+      MYSQL_USER: todo
+      MYSQL_PASSWORD: todopassword
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
